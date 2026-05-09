@@ -5,7 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>予約台帳</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>*{box-sizing:border-box;}body{margin:0;}</style>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+
+    /* スマホ：出力・入力ボタン非表示 */
+    @media (max-width: 600px) {
+      .desktopOnly { display: none !important; }
+
+      /* ヘッダーナビを2段に折り返し */
+      header { padding: 6px 8px !important; }
+      nav { gap: 3px !important; }
+      nav button { font-size: 10px !important; padding: 4px 7px !important; }
+
+      /* フォームを1カラムに */
+      .fGrid { grid-template-columns: 1fr !important; }
+
+      /* ガントチャートの最小幅を下げる */
+      .ganttWrap { font-size: 10px; }
+    }
+
+    /* PC：問題なし */
+    @media (min-width: 601px) {
+      .desktopOnly { display: flex !important; }
+    }
+  </style>
 </head>
 <body>
   <div id="root"></div>
@@ -324,8 +348,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   </script>
   <script>
 (function() {
-  if (!window.React)    { document.getElementById("root").innerHTML="<p style=\'padding:20px;color:red\'>React load error</p>"; return; }
-  if (!window.ReactDOM) { document.getElementById("root").innerHTML="<p style=\'padding:20px;color:red\'>ReactDOM load error</p>"; return; }
+  if (!window.React)    { document.getElementById("root").innerHTML="<p style='padding:20px;color:red'>React load error</p>"; return; }
+  if (!window.ReactDOM) { document.getElementById("root").innerHTML="<p style='padding:20px;color:red'>ReactDOM load error</p>"; return; }
   const { useState, useEffect, useCallback, useMemo, useRef } = React;
 
 // ==================== 来店内容色定数 ====================
@@ -1705,12 +1729,15 @@ function AppHeader({
     onClick: onTrash,
     active: page === "trash"
   }, "\uD83D\uDDD1", trashCount > 0 ? ` ${trashCount}` : ""), /*#__PURE__*/React.createElement("div", {
+    className: "desktopOnly",
+    style: { display: "flex", gap: 4, alignItems: "center" }
+  }, /*#__PURE__*/React.createElement("div", {
     style: S.navDiv
   }), /*#__PURE__*/React.createElement(HBtn, {
     onClick: onExport
   }, "\u2B06\u51FA\u529B"), /*#__PURE__*/React.createElement(HBtn, {
     onClick: onImport
-  }, "\u2B07\u5165\u529B"))));
+  }, "\u2B07\u5165\u529B")))));
 }
 const HBtn = ({
   children,
@@ -3785,7 +3812,7 @@ const S = {
   header: {
     background: C.dark,
     color: "#fff",
-    padding: "0 10px",
+    padding: "6px 10px",
     position: "sticky",
     top: 0,
     zIndex: 100,
@@ -3797,8 +3824,9 @@ const S = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 48,
-    gap: 4
+    flexWrap: "wrap",
+    gap: 6,
+    padding: "2px 0"
   },
   logo: {
     fontSize: 14,
@@ -3810,9 +3838,11 @@ const S = {
   },
   nav: {
     display: "flex",
-    gap: 3,
+    gap: 4,
     alignItems: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    flex: 1,
+    justifyContent: "flex-end"
   },
   navBtn: {
     background: "transparent",
@@ -3860,7 +3890,7 @@ const S = {
   main: {
     maxWidth: 1600,
     margin: "0 auto",
-    padding: "14px 10px"
+    padding: "16px 10px 20px"
   },
   card: {
     background: C.surface,
