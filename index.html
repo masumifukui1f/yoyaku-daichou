@@ -12,20 +12,12 @@
     /* スマホ：出力・入力ボタン非表示 */
     @media (max-width: 600px) {
       .desktopOnly { display: none !important; }
-
-      /* ヘッダーナビを2段に折り返し */
       header { padding: 6px 8px !important; }
       nav { gap: 3px !important; }
       nav button { font-size: 10px !important; padding: 4px 7px !important; }
-
-      /* フォームを1カラムに */
       .fGrid { grid-template-columns: 1fr !important; }
-
-      /* ガントチャートの最小幅を下げる */
       .ganttWrap { font-size: 10px; }
     }
-
-    /* PC：問題なし */
     @media (min-width: 601px) {
       .desktopOnly { display: flex !important; }
     }
@@ -369,12 +361,27 @@ const VISIT_CONTENTS = [{
   border: "#2980b9",
   bg: "#eaf4fb"
 }, {
+  value: "小物合わせ",
+  color: "#555",
+  border: "#ccc",
+  bg: "#fafafa"
+}, {
+  value: "LF",
+  color: "#555",
+  border: "#ccc",
+  bg: "#fafafa"
+}, {
   value: "打合せ",
   color: "#555",
   border: "#aaa",
   bg: "#f5f5f5"
+}, {
+  value: "その他",
+  color: "#555",
+  border: "#ccc",
+  bg: "#fafafa"
 }];
-const getVC = v => VISIT_CONTENTS.find(c => c.value === v) || VISIT_CONTENTS[3];
+const getVC = v => VISIT_CONTENTS.find(c => c.value === v) || VISIT_CONTENTS[VISIT_CONTENTS.length - 1];
 const SCHEDULE_TYPES = ["休暇", "キロクルStudio", "出張", "会議"];
 const SCH_COLORS = {
   休暇: "#6b7280",
